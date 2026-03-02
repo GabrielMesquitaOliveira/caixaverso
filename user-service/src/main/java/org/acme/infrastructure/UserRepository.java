@@ -5,8 +5,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.acme.domain.User;
-import org.acme.domain.port.UserRepositoryPort;
+
+import org.acme.domain.entity.User;
+import org.acme.domain.repository.UserRepositoryPort;
 
 @ApplicationScoped
 public class UserRepository implements PanacheRepositoryBase<UserJpaEntity, String>, UserRepositoryPort {

@@ -3,8 +3,9 @@ package org.acme.application;
 import jakarta.enterprise.context.ApplicationScoped;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.acme.domain.UserNotFoundException;
-import org.acme.domain.port.UserRepositoryPort;
+
+import org.acme.domain.exceptions.UserNotFoundException;
+import org.acme.domain.repository.UserRepositoryPort;
 
 @ApplicationScoped
 public class GetUserUseCase {

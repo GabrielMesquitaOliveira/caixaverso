@@ -1,7 +1,8 @@
 package org.acme.presentation;
 
 import jakarta.ws.rs.core.Response;
-import org.acme.domain.UserNotFoundException;
+
+import org.acme.domain.exceptions.UserNotFoundException;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 
 public class UserExceptionHandler {

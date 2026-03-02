@@ -1,6 +1,6 @@
 package org.acme.application;
 
-import org.acme.domain.User;
+import org.acme.domain.entity.User;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "cdi")

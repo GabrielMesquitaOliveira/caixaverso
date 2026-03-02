@@ -1,4 +1,4 @@
-package org.acme.domain;
+package org.acme.domain.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {

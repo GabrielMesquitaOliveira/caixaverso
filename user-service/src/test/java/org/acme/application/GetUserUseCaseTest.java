@@ -5,9 +5,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.util.Optional;
-import org.acme.domain.User;
-import org.acme.domain.UserNotFoundException;
-import org.acme.domain.port.UserRepositoryPort;
+
+import org.acme.domain.entity.User;
+import org.acme.domain.exceptions.UserNotFoundException;
+import org.acme.domain.repository.UserRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

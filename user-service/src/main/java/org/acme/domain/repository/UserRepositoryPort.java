@@ -1,8 +1,9 @@
-package org.acme.domain.port;
+package org.acme.domain.repository;
 
-import org.acme.domain.User;
 import java.util.List;
 import java.util.Optional;
+
+import org.acme.domain.entity.User;
 
 public interface UserRepositoryPort {
     User save(User user);
