@@ -1,16 +1,7 @@
 FROM registry.access.redhat.com/ubi9/openjdk-25:1.24
 
 USER root
-RUN microdnf install findutils tar gzip unzip
+RUN microdnf install -y findutils tar gzip unzip
 
-USER 185
-ENV MAVEN_VERSION=3.9.6
-ENV MAVEN_HOME=/home/jboss/apache-maven-${MAVEN_VERSION}
-ENV PATH=${MAVEN_HOME}/bin:${PATH}
-
-RUN curl -fsSL -o /tmp/apache-maven.tar.gz https://archive.apache.org/dist/maven/maven-3/$\{MAVEN_VERSION\}/binaries/apache-maven-$\{MAVEN_VERSION\}-bin.tar.gz \
-    && tar xzf /tmp/apache-maven.tar.gz -C /home/jboss \
-    && rm /tmp/apache-maven.tar.gz
-
-WORKDIR /app
-CMD ["mvn", "quarkus:dev"]
+WORKDIR /usr/src/app
+CMD ["./mvnw", "quarkus:dev"]

@@ -15,6 +15,11 @@ public class ReservationExceptionHandler {
     }
 
     @ServerExceptionMapper
+    public Response handleIllegalArgumentException(IllegalArgumentException ex) {
+        return handleValidationException(ex);
+    }
+
+    @ServerExceptionMapper
     public Response handleInvalidTimeSlotException(InvalidTimeSlotException ex) {
         return handleValidationException(ex);
     }

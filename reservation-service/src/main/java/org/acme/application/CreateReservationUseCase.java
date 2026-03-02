@@ -1,6 +1,7 @@
 package org.acme.application;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 import java.util.UUID;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class CreateReservationUseCase {
                 this.userGateway = userGateway;
         }
 
+        @Transactional
         public ReservationDto execute(ReservationDto reservationDto) {
                 // 1. Cross-service validation: verify user exists
                 String username = userGateway.findUsernameById(reservationDto.userId())

@@ -1,62 +1,69 @@
-# user-service
+# User Service
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+A Quarkus-based microservice for managing users in the Caixaverso project, built with Clean Architecture principles and Java 25.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## Quick Start
 
-## Running the application in dev mode
+### Prerequisites
+- Java 25
+- Maven
+- Docker & Docker Compose (for local database)
 
-You can run your application in dev mode that enables live coding using:
+### Running Locally
+1. Start the PostgreSQL database:
+   ```bash
+   cd ../infra
+   docker-compose -f docker-compose.dev.yml up -d
+   ```
+2. Run the application in dev mode:
+   ```bash
+   ./mvnw compile quarkus:dev
+   ```
 
-```shell script
-./mvnw quarkus:dev
+The application will be available at `http://localhost:8080`.
+The OpenAPI/Swagger UI is accessible at `http://localhost:8080/q/swagger-ui/`.
+
+## Features
+
+- **Clean Architecture:** Strict separation of concerns (Domain, Application, Presentation, Infrastructure).
+- **User Management:** Create and retrieve users.
+- **Data Persistence:** Hibernate ORM with Panache and PostgreSQL.
+- **DTO Mapping:** MapStruct integration for efficient data transformation.
+- **Health Checks:** SmallRye Health endpoints included out of the box.
+
+## API Reference
+
+Base URL: `http://localhost:8080/api/users`
+
+| Method | Endpoint | Description | Request Body | Response |
+|--------|----------|-------------|--------------|----------|
+| `POST` | `/` | Create a new user | `{ "username": "...", "email": "...", "fullName": "..."}` | `201 Created` / User object |
+| `GET` | `/{id}` | Get user by ID | - | `200 OK` / User object |
+| `GET` | `/` | Get all users | - | `200 OK` / List of User objects |
+
+## Configuration
+
+Key environment properties configured in `src/main/resources/application.properties`:
+
+| Key | Description | Default / Example |
+|-----|-------------|-------------------|
+| `quarkus.http.port` | The port the HTTP server listens on | `8080` |
+| `quarkus.datasource.jdbc.url` | Database connection URL | `jdbc:postgresql://localhost:5432/user_db` |
+| `quarkus.datasource.username` | Database username | `sa` |
+| `quarkus.datasource.password` | Database password | `sa` |
+| `quarkus.swagger-ui.always-include` | Expose Swagger UI at `/q/swagger-ui` | `true` |
+| `quarkus.log.level` | Application log level | `INFO` |
+
+## Architecture
+
+This service follows **Clean Architecture**:
+- **Domain:** Contains core business rules and entities (`User`).
+- **Application:** Contains use cases (`CreateUserUseCase`, `GetUserUseCase`) and DTOs mapping.
+- **Presentation:** Contains REST resources (`UserResource`) and exception handlers.
+- **Infrastructure:** Contains database repositories (`UserRepository`, `UserJpaEntity`) and adapters.
+
+## Developing & Testing
+Tests can be run using Maven, utilizing the dedicated test profile defined in the configuration, which also targets PostgreSQL:
+```bash
+./mvnw test
 ```
-
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
-
-## Packaging and running the application
-
-The application can be packaged using:
-
-```shell script
-./mvnw package
-```
-
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/user-service-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
