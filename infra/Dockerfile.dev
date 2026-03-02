@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/openjdk-25-runtime:1.24
+FROM registry.access.redhat.com/ubi9/openjdk-25:1.24
 
 USER root
 RUN microdnf install findutils tar gzip unzip
