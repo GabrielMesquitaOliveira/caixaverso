@@ -5,6 +5,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.application.ReservationDto;
 import org.acme.application.AvailableSlotDto;
+import org.acme.application.CreateReservationUseCase;
+import org.acme.application.GetAvailableSlotsUseCase;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,16 +15,26 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ReservationResource {
 
+    private final CreateReservationUseCase createReservationUseCase;
+    private final GetAvailableSlotsUseCase getAvailableSlotsUseCase;
+
+    public ReservationResource(CreateReservationUseCase createReservationUseCase,
+            GetAvailableSlotsUseCase getAvailableSlotsUseCase) {
+        this.createReservationUseCase = createReservationUseCase;
+        this.getAvailableSlotsUseCase = getAvailableSlotsUseCase;
+    }
+
     @POST
     public Response createReservation(ReservationDto reservationDto) {
-        // TODO: Implement
-        return Response.status(Response.Status.CREATED).build();
+        ReservationDto created = createReservationUseCase.execute(reservationDto);
+        return Response.status(Response.Status.CREATED).entity(created).build();
     }
 
     @GET
     @Path("/available")
     public Response getAvailableSlots(@QueryParam("date") String dateStr, @QueryParam("resource") String resourceName) {
-        // TODO: Implement
-        return Response.ok(List.of()).build();
+        LocalDate date = LocalDate.parse(dateStr);
+        List<AvailableSlotDto> slots = getAvailableSlotsUseCase.execute(date, resourceName);
+        return Response.ok(slots).build();
     }
 }

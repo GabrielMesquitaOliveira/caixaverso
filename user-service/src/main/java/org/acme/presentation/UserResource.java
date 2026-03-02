@@ -4,6 +4,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.application.UserDto;
+import org.acme.application.CreateUserUseCase;
+import org.acme.application.GetUserUseCase;
 import java.util.List;
 
 @Path("/api/users")
@@ -11,22 +13,30 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
 
+    private final CreateUserUseCase createUserUseCase;
+    private final GetUserUseCase getUserUseCase;
+
+    public UserResource(CreateUserUseCase createUserUseCase, GetUserUseCase getUserUseCase) {
+        this.createUserUseCase = createUserUseCase;
+        this.getUserUseCase = getUserUseCase;
+    }
+
     @POST
     public Response createUser(UserDto userDto) {
-        // TODO: Implement
-        return Response.status(Response.Status.CREATED).build();
+        UserDto created = createUserUseCase.execute(userDto);
+        return Response.status(Response.Status.CREATED).entity(created).build();
     }
 
     @GET
     @Path("/{id}")
     public Response getUser(@PathParam("id") String id) {
-        // TODO: Implement
-        return Response.ok().build();
+        UserDto user = getUserUseCase.getUserById(id);
+        return Response.ok(user).build();
     }
 
     @GET
     public Response getAllUsers() {
-        // TODO: Implement
-        return Response.ok(List.of()).build();
+        List<UserDto> users = getUserUseCase.getAllUsers();
+        return Response.ok(users).build();
     }
 }
