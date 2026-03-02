@@ -1,5 +1,7 @@
 package org.acme.domain;
 
+import org.acme.domain.entity.Reservation;
+import org.acme.domain.exceptions.BusinessHoursViolationException;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.*;

@@ -7,8 +7,9 @@ import static org.mockito.Mockito.*;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
-import org.acme.domain.Reservation;
-import org.acme.domain.SlotAlreadyBookedException;
+
+import org.acme.domain.entity.Reservation;
+import org.acme.domain.exceptions.SlotAlreadyBookedException;
 import org.acme.domain.port.ReservationRepositoryPort;
 import org.acme.domain.port.UserGateway;
 import org.junit.jupiter.api.BeforeEach;

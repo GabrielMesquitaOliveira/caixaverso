@@ -1,6 +1,11 @@
-package org.acme.domain;
+package org.acme.domain.entity;
 
 import java.time.LocalDateTime;
+
+import org.acme.domain.exceptions.BusinessHoursViolationException;
+import org.acme.domain.exceptions.InvalidDurationException;
+import org.acme.domain.exceptions.InvalidTimeSlotException;
+
 import java.time.Duration;
 
 public class Reservation {

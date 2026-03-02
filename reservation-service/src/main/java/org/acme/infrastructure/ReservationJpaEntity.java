@@ -6,7 +6,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import java.time.LocalDateTime;
-import org.acme.domain.ReservationStatus;
+
+import org.acme.domain.entity.ReservationStatus;
 
 @Entity
 @Table(name = "reservations")

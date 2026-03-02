@@ -7,7 +7,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import org.acme.domain.Reservation;
+
+import org.acme.domain.entity.Reservation;
 import org.acme.domain.port.ReservationRepositoryPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

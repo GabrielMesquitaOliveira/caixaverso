@@ -1,4 +1,4 @@
-package org.acme.domain;
+package org.acme.domain.entity;
 
 public enum ReservationStatus {
     CONFIRMED,

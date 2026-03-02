@@ -2,6 +2,10 @@ package org.acme.presentation;
 
 import jakarta.ws.rs.core.Response;
 import org.acme.domain.*;
+import org.acme.domain.exceptions.BusinessHoursViolationException;
+import org.acme.domain.exceptions.InvalidDurationException;
+import org.acme.domain.exceptions.InvalidTimeSlotException;
+import org.acme.domain.exceptions.SlotAlreadyBookedException;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 
 public class ReservationExceptionHandler {

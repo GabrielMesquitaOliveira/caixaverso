@@ -5,7 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.acme.domain.Reservation;
+
+import org.acme.domain.entity.Reservation;
 import org.acme.domain.port.ReservationRepositoryPort;
 
 @ApplicationScoped

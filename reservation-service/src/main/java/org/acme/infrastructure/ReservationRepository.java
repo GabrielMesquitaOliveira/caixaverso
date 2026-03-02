@@ -5,7 +5,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.acme.domain.Reservation;
+
+import org.acme.domain.entity.Reservation;
 import org.acme.domain.port.ReservationRepositoryPort;
 
 @ApplicationScoped
@@ -45,7 +46,7 @@ public class ReservationRepository
                 entity.getResourceName(),
                 entity.getStartDate(),
                 entity.getEndDate());
-        if (entity.getStatus() == org.acme.domain.ReservationStatus.CANCELLED) {
+        if (entity.getStatus() == org.acme.domain.entity.ReservationStatus.CANCELLED) {
             res.cancel();
         }
         return res;
